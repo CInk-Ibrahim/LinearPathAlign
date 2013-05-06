@@ -52,11 +52,11 @@ int main() {
 	cout << A[v6] << " - " << A[v7] << " - " << A[v8] << " - " << A[v9] << endl;
 	cout << "LA Score : " << la_score(G, A) << endl;
 
-	simulated_annealing(G, A);
+	//simulated_annealing(G, A);
 
-	cout << A[v1] << " - " << A[v2] << " - " << A[v3] << " - " << A[v4] << " - "
-			<< A[v5] << " - " << endl;
-	cout << A[v6] << " - " << A[v7] << " - " << A[v8] << " - " << A[v9] << endl;
-	cout << "LA Score : " << la_score(G, A) << endl;
+	//cout << A[v1] << " - " << A[v2] << " - " << A[v3] << " - " << A[v4] << " - "
+	//		<< A[v5] << " - " << endl;
+	//cout << A[v6] << " - " << A[v7] << " - " << A[v8] << " - " << A[v9] << endl;
+	//cout << "LA Score : " << la_score(G, A) << endl;
 
 }
