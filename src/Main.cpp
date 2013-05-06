@@ -26,7 +26,7 @@ int main() {
 	node v8 = G.new_node();
 	node v9 = G.new_node();
 
-	G.new_edge(v2, v1);
+	//G.new_edge(v2, v1);
 	G.new_edge(v3, v1);
 	G.new_edge(v3, v4);
 	G.new_edge(v2, v7);
