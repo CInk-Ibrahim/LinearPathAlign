@@ -9,7 +9,7 @@
 
 int main() {
 
-	graph G;
+	//graph G;
 
 	node v1 = G.new_node();
 	node v2 = G.new_node();
