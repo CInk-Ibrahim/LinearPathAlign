@@ -36,22 +36,18 @@ int main() {
 
 	//G.sort_nodes(A);
 
-	init_layout_normal(G, A);
+	init_layout(G, A, 1);
 
+	cout << A[v1] << " - " << A[v2] << " - " << A[v3] << " - ";
+	cout << A[v4] << " - " << A[v5] << " - " << A[v6] << " - ";
+	cout << A[v7] << " - " << A[v8] << " - " << A[v9] << endl;
 	cout << "LA Score : " << la_score(G, A) << endl;
 
 	simulated_annealing(G, A);
 
-	cout << A[v1] << " - " << A[v2] << " - " << A[v3] << " - " << A[v4] << " - "
-	<< A[v5] << " - " << endl;
-	cout << A[v6] << " - " << A[v7] << " - " << A[v8] << " - " << A[v9] << endl;
+	cout << A[v1] << " - " << A[v2] << " - " << A[v3] << " - ";
+	cout << A[v4] << " - " << A[v5] << " - " << A[v6] << " - ";
+	cout << A[v7] << " - " << A[v8] << " - " << A[v9] << endl;
 	cout << "LA Score : " << la_score(G, A) << endl;
-
-	//simulated_annealing(G, A);
-
-	//cout << A[v1] << " - " << A[v2] << " - " << A[v3] << " - " << A[v4] << " - "
-	//		<< A[v5] << " - " << endl;
-	//cout << A[v6] << " - " << A[v7] << " - " << A[v8] << " - " << A[v9] << endl;
-	//cout << "LA Score : " << la_score(G, A) << endl;
 
 }

@@ -72,6 +72,18 @@ void init_layout(graph& G, node_array<int>& A, int type) {
 	case 1:
 		init_layout_normal(G, A);
 		break;
+	case 2:
+		init_layout_rand(G, A);
+		break;
+	case 3:
+		init_layout_rbfs(G, A);
+		break;
+	case 4:
+		init_layout_bfs(G, A);
+		break;
+	case 5:
+		init_layout_dfs(G, A);
+		break;
 	default:
 		break;
 	}
@@ -83,6 +95,54 @@ void init_layout_normal(graph& G, node_array<int>& A) {
 	int i = 1;
 
 	forall_nodes(v, G) {
+		A[v] = i;
+		i++;
+	}
+}
+
+void init_layout_rand(graph& G, node_array<int>& A) {
+
+	srand(time(NULL));
+	node v;
+	forall_nodes(v, G) {
+		A[v] = 0;
+	}
+
+	int randplace[G.number_of_nodes()];
+
+	for (int i = 0; i < G.number_of_nodes(); i++)
+		randplace[i] = i + 1;
+
+	random_shuffle(randplace, randplace + G.number_of_nodes());
+
+	int i = 0;
+	forall_nodes(v,G) {
+		A[v] = randplace[i];
+		i++;
+	}
+}
+
+void init_layout_rbfs(graph& G, node_array<int>& A) {
+
+}
+
+void init_layout_bfs(graph& G, node_array<int>& A) {
+	node v;
+	int i = 0;
+
+	for (BFS_It it(G, G.choose_node()); it.valid(); ++it) {
+		v = it.get_node();
+		A[v] = i;
+		i++;
+	}
+}
+
+void init_layout_dfs(graph& G, node_array<int>& A) {
+	node v;
+	int i = 0;
+
+	for (DFS_It it(G, G.choose_node()); it.valid(); ++it) {
+		v = it.get_node();
 		A[v] = i;
 		i++;
 	}

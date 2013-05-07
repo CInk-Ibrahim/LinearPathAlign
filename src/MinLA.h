@@ -22,6 +22,15 @@ void flip2(graph& G, node_array<int>& A, node a, node b);
 void init_layout(graph& G, node_array<int>& A, int type);
 //Type 1
 void init_layout_normal(graph& G, node_array<int>& A);
+//Type 2
+void init_layout_rand(graph& G, node_array<int>& A);
+//Type 3
+void init_layout_rbfs(graph& G, node_array<int>& A);
+//Type 4
+void init_layout_bfs(graph& G, node_array<int>& A);
+//Type 5
+void init_layout_dfs(graph& G, node_array<int>& A);
+
 
 //Applies Simulated Annealing for MinLa problem on graph with initial ordering A
 void simulated_annealing(graph& G, node_array<int>& A);

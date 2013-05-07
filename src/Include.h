@@ -13,6 +13,11 @@ using leda::node;
 using leda::edge;
 using leda::node_array;
 
+#include <LEDA/graph/graph_iterator.h>
+using leda::DFS_It;
+using leda::BFS_It;
+
+
 #include <LEDA/numbers/integer.h>
 using leda::integer;
 
@@ -28,8 +33,10 @@ using std::endl;
 
 #include <algorithm>
 using std::min;
+using std::random_shuffle;
 
 #include <cstdlib>
 using std::abs;
+using std::srand;
 
 #endif /* INCLUDE_H_ */
