@@ -36,7 +36,7 @@ int main() {
 
 	//G.sort_nodes(A);
 
-	init_layout(G, A, 1);
+	init_layout(G, A, 2);
 
 	cout << A[v1] << " - " << A[v2] << " - " << A[v3] << " - ";
 	cout << A[v4] << " - " << A[v5] << " - " << A[v6] << " - ";
