@@ -123,7 +123,13 @@ void init_layout_rand(graph& G, node_array<int>& A) {
 }
 
 void init_layout_rbfs(graph& G, node_array<int>& A) {
+	node v;
+		int i = 0;
 
+		for (BFS_It it(G, G.choose_node()); it.valid(); ++it) {
+			v = it.get_node();
+			A[v] = i;
+			i++;
 }
 
 void init_layout_bfs(graph& G, node_array<int>& A) {
