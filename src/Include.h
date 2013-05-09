@@ -7,6 +7,35 @@
 #ifndef INCLUDE_H_
 #define INCLUDE_H_
 
+#include <LEDA/graphics/graphwin.h>
+using leda::GraphWin;
+using leda::gw_node_shape;
+using leda::rectangle_node;
+using leda::gw_edge_dir;
+using leda::bidirected_edge;
+using leda::gw_label_type;
+using leda::user_label;
+
+
+
+#include <LEDA/graphics/window.h>
+using leda::window;
+
+#include <LEDA/graphics/color.h>
+using leda::color;
+using leda::grey1;
+using leda::grey2;
+using leda::grey3;
+using leda::invisible;
+using leda::white;
+using leda::red;
+using leda::blue;
+using leda::blue2;
+using leda::orange;
+
+#include <LEDA/geo/point.h>
+using leda::point;
+
 #include <LEDA/graph/graph.h>
 using leda::graph;
 using leda::node;
@@ -22,18 +51,38 @@ using leda::edge_array;
 using leda::DFS_It;
 using leda::BFS_It;
 
+#include <LEDA/graph/basic_graph_alg.h>
+using leda::DFS_NUM;
+
+
+#include <LEDA/graph/node_list.h>
+using leda::node_list;
+
 #include <LEDA/numbers/integer.h>
 using leda::integer;
 
 #include <LEDA/system/basic.h>
 using leda::swap;
 
-
 #include <LEDA/core/array.h>
 using leda::array;
 
+#include <LEDA/core/string.h>
+using leda::string;
+
+
+#include <LEDA/system/stream.h>
+using leda::string_ostream;
+
+
 #include <LEDA/core/random_source.h>
 using leda::random_source;
+
+#include <LEDA/core/list.h>
+using leda::list;
+
+#include <LEDA/core/map.h>
+using leda::map;
 
 
 #include <iostream>
@@ -51,9 +100,10 @@ using std::abs;
 using std::srand;
 using std::atoi;
 
-#include <string>
-using std::string;
-using std::getline;
-using std::stringstream;
+
+
+
+
+
 
 #endif /* INCLUDE_H_ */

@@ -22,33 +22,35 @@ int la_score(graph& G, node_array<int>& A) {
 int la_score_flip2(graph& G, node_array<int>& A, node a, node b) {
 
 	node_array<int> B = A;
-	swap(A[a], A[b]);
+	swap(B[a], B[b]);
 	int score = 0;
-	edge e;
+	//edge e;
 
-	forall_inout_edges(e,a) {
-		score = score + abs(A[G.source(e)] - A[G.target(e)]);
-		//cout << A[G.source(e)] << " - " << A[G.target(e)] << " : " << score << endl;
+	score = la_score(G, A) - la_score(G, B);
+	/*
+	 forall_inout_edges(e,a) {
+	 score = score + abs(A[G.source(e)] - A[G.target(e)]);
+	 //cout << A[G.source(e)] << " - " << A[G.target(e)] << " : " << score << endl;
 
-	}
-	forall_inout_edges(e,b) {
-		if ((A[G.source(e)] != A[a]) && (A[G.target(e)] != A[a])) {
-			score = score + abs(A[G.source(e)] - A[G.target(e)]);
-			//cout << A[G.source(e)] << " - " << A[G.target(e)] << " : " << score << endl;
-		}
-	}
+	 }
+	 forall_inout_edges(e,b) {
+	 if ((A[G.source(e)] != A[a]) && (A[G.target(e)] != A[a])) {
+	 score = score + abs(A[G.source(e)] - A[G.target(e)]);
+	 //cout << A[G.source(e)] << " - " << A[G.target(e)] << " : " << score << endl;
+	 }
+	 }
 
-	forall_inout_edges(e,a) {
-		score = score - abs(B[G.source(e)] - B[G.target(e)]);
-		//cout << B[G.source(e)] << " - " << B[G.target(e)] << " : " << score << endl;
-	}
-	forall_inout_edges(e,b) {
-		if ((B[G.source(e)] != B[a]) && (B[G.target(e)] != B[a])) {
-			score = score - abs(B[G.source(e)] - B[G.target(e)]);
-			//cout << B[G.source(e)] << " - " << B[G.target(e)] << " : " << score << endl;
-		}
-	}
-
+	 forall_inout_edges(e,a) {
+	 score = score - abs(B[G.source(e)] - B[G.target(e)]);
+	 //cout << B[G.source(e)] << " - " << B[G.target(e)] << " : " << score << endl;
+	 }
+	 forall_inout_edges(e,b) {
+	 if ((B[G.source(e)] != B[a]) && (B[G.target(e)] != B[a])) {
+	 score = score - abs(B[G.source(e)] - B[G.target(e)]);
+	 //cout << B[G.source(e)] << " - " << B[G.target(e)] << " : " << score << endl;
+	 }
+	 }
+	 */
 	return score;
 
 }
@@ -123,35 +125,37 @@ void init_layout_rand(graph& G, node_array<int>& A) {
 }
 
 void init_layout_rbfs(graph& G, node_array<int>& A) {
-	node v;
-		int i = 0;
 
-		for (BFS_It it(G, G.choose_node()); it.valid(); ++it) {
-			v = it.get_node();
-			A[v] = i;
-			i++;
 }
 
 void init_layout_bfs(graph& G, node_array<int>& A) {
 	node v;
 	int i = 0;
-
-	for (BFS_It it(G, G.choose_node()); it.valid(); ++it) {
-		v = it.get_node();
-		A[v] = i;
-		i++;
+	forall_nodes(v,G) {
+		if (A[v] == 0)
+			for (BFS_It it(G, v); it.valid(); ++it) {
+				v = it.get_node();
+				A[v] = i;
+				i++;
+			}
 	}
 }
 
 void init_layout_dfs(graph& G, node_array<int>& A) {
-	node v;
-	int i = 0;
+	//node v;
+	//int i = 0;
+	node_array<int> B = A;
+	DFS_NUM(G, A, B);
 
-	for (DFS_It it(G, G.choose_node()); it.valid(); ++it) {
-		v = it.get_node();
-		A[v] = i;
-		i++;
-	}
+	/*forall_nodes(v,G) {
+	 if (A[v] == 0)
+	 for (DFS_It it(G, v); it.valid(); ++it) {
+	 v = it.get_node();
+	 A[v] = i;
+	 i++;
+	 }
+	 }*/
+
 }
 
 void simulated_annealing(graph& G, node_array<int>& A) {
@@ -194,6 +198,48 @@ void simulated_annealing(graph& G, node_array<int>& A) {
 		}
 		temp = temp * alpha; //drop temperature
 	}
+}
+
+void simulated_annealing_protected(graph& G, node_array<int>& A, node_list& L) {
+
+	cout << "Start SA" << endl;
+
+	double temp = 10; //set initial temperature
+	double temp_f = 0.2; //set finishing temperature
+	double r = 20 * pow((double) G.number_of_nodes(), (double) 3 / 2); //set equilibrium rate (repeat times)
+	double alpha = 0.95;	//cooling rate
+
+	cout << "r :" << r << endl;
+
+	random_source S; //random number generator
+	node u;
+	node v;
+	double z = 0; //Gain when flip2 is done
+
+	while (temp >= temp_f) {	//While !frozen
+		//cout << "Start temp loop" << endl;
+		for (int i = 0; i < r; i++) {	//While !equilibrium (Repeat r times)
+			//cout << "Repeat"<< i << endl;
+			u = G.choose_node();	//get a random node
+			v = G.choose_node();	//get a random node
+
+			z = la_score_flip2(G, A, u, v);	//find gain of flip2 of u & v
+
+			if (z > 0) {//if prob is smaller do with probability (based on temp and gain of flip2)
+
+				if (L.member(u)) {
+
+				} else if (L.member(v)) {
+
+				} else
+					flip2(G, A, u, v);			//flip places of u & v
+
+			}
+
+		}
+		temp = temp * alpha; //drop temperature
+	}
+	cout << "la_score" << la_score(G, A);
 }
 
 MinLA::MinLA() {

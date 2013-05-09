@@ -35,6 +35,8 @@ void init_layout_dfs(graph& G, node_array<int>& A);
 //Applies Simulated Annealing for MinLa problem on graph with initial ordering A
 void simulated_annealing(graph& G, node_array<int>& A);
 
+void simulated_annealing_protected(graph& G, node_array<int>& A, node_list& L);
+
 class MinLA {
 public:
 	MinLA();
