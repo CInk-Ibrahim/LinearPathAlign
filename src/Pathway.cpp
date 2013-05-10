@@ -9,10 +9,10 @@
 #include "Include.h"
 
 void create_edge_ec(graph& G, edge_array<int>& EC1, edge_array<int>& EC2,
-		edge_array<int>& EC3, edge_array<int>& EC4, edge k, string EC) {
+		edge_array<int>& EC3, edge_array<int>& EC4, edge k, std::string EC) {
 
 	std::string word;
-	stringstream stream(EC);
+	std::stringstream stream(EC);
 	getline(stream, word, '.');
 	int value = atoi(word.c_str()); //value = 45
 	EC1[k] = value;

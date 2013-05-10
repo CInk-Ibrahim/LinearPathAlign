@@ -9,7 +9,7 @@
 #include "Include.h"
 
 void draw_arr(graph& G, node_array<int>& A, node_array<int>& B, graph& K,
-		node_array<int>& V, node_array<int>& Z) {
+		node_array<int>& V, node_array<int>& Z, array<int> Li) {
 
 	GraphWin gw(G, 1000, 600, "Alignment");
 
@@ -18,11 +18,16 @@ void draw_arr(graph& G, node_array<int>& A, node_array<int>& B, graph& K,
 	gw.display(window::center, window::center);
 	//gw.get_window().draw_int_node(50, 50, 5, grey1);
 
-	gw.set_node_width(25);
-	gw.set_node_border_thickness(2,true);
-	gw.set_edge_thickness(1);
+	gw.set_node_width(35);
+	gw.set_node_border_thickness(3, true);
+	gw.set_edge_thickness(1.5);
 	gw.set_node_label_type(leda::user_label);
 	gw.set_edge_label_type(leda::user_label);
+	gw.set_bg_color(white);
+	gw.get_window().set_bg_color(white);
+	gw.get_window().set_line_width(5);
+
+	int nodes = G.number_of_nodes();
 
 	int po1 = 100;
 	int po2 = 400;
@@ -31,7 +36,6 @@ void draw_arr(graph& G, node_array<int>& A, node_array<int>& B, graph& K,
 	node v;
 	node_array<point> pos(G);
 
-
 	forall_nodes(v,G) {
 
 		string st;          //The string
@@ -39,7 +43,8 @@ void draw_arr(graph& G, node_array<int>& A, node_array<int>& B, graph& K,
 		te << B[v];
 
 		gw.set_user_label(v, te.str());
-		gw.set_border_color(v,blue);
+		gw.set_border_color(v, violet);
+		gw.set_label_color(v, violet);
 	}
 
 	forall_nodes(v,G) {
@@ -115,12 +120,13 @@ void draw_arr(graph& G, node_array<int>& A, node_array<int>& B, graph& K,
 		te << Z[v];
 
 		gw.set_user_label(g, te.str());
-		gw.set_border_color(g,blue2);
+		gw.set_border_color(g, blue2);
+		gw.set_label_color(g, blue2);
+
 	}
 
 	counter = 0;
 	lastl = 0;
-
 
 	forall_edges(e,K) {
 		edge ee = gw.new_edge(M[G.source(e)], M[G.target(e)]);
@@ -159,8 +165,50 @@ void draw_arr(graph& G, node_array<int>& A, node_array<int>& B, graph& K,
 		}
 	}
 
-	gw.set_bg_color(white);
-	gw.get_window().set_bg_color(white);
+	int i = 1;
+	int x1 = 50;
+	int x2 = 50;
+	int y1 = 50;
+	int y2 = 550;
+	color c;
+
+	while (i <= nodes) {
+		cout << Li[i] << endl;
+
+		if (Li[i] == 1) {
+			c = blue;
+			while ((i < nodes) && (Li[i] == 1)) {
+				x2 = x2 + 100;
+				i++;
+
+			}
+			if ((i == nodes) && (Li[i] == 1)) {
+				x2 = x2 + 100;
+				i++;
+			}
+
+			gw.get_window().draw_rectangle(x1, y1, x2-5, y2, c);
+			x1 = x2;
+
+		} else {
+			c = red;
+			while ((i < nodes) && (Li[i] != 1)) {
+				x2 = x2 + 100;
+				i++;
+			}
+			if ((i == nodes) && (Li[i] != 1)) {
+				x2 = x2 + 100;
+				i++;
+			}
+
+			gw.get_window().draw_rectangle(x1, y1, x2-5, y2, c);
+			x1 = x2;
+		}
+
+	}
+
+	//gw.get_window().draw_rectangle(50, 50, 400, 400, red);
+
 	gw.edit();
 
 	cout << "Press RETURN to continue... ";

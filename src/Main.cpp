@@ -37,6 +37,8 @@ int main() {
 
 	node_array<int> A(G);
 
+	node_array<int> B(G);
+
 	//G.sort_nodes(A);
 
 	init_layout(G, A, 4);
@@ -96,7 +98,7 @@ int main() {
 	Z[k6] = 221;
 	Z[k7] = 5378;
 
-	init_layout(K, V, 4);
+	init_layout(K, V, 5);
 
 	cout << V[k1] << " - " << V[k2] << " - " << V[k3] << " - ";
 	cout << V[k4] << " - " << V[k5] << " - " << V[k6] << " - ";
@@ -123,19 +125,19 @@ int main() {
 	KK.new_edge(kk1, kk2);
 	KK.new_edge(kk2, kk1);
 	KK.new_edge(kk2, kk3);
-	KK.new_edge(kk3, kk2);
-	KK.new_edge(kk3, kk2);
+	//KK.new_edge(kk3, kk2);
+	//KK.new_edge(kk3, kk2);
 	KK.new_edge(kk3, kk2);
 	KK.new_edge(kk2, kk4);
 	KK.new_edge(kk4, kk2);
 	KK.new_edge(kk2, kk5);
 	KK.new_edge(kk5, kk2);
-	KK.new_edge(kk3, kk6);
+	//KK.new_edge(kk3, kk6);
 	KK.new_edge(kk6, kk3);
-	KK.new_edge(kk5, kk4);
-	KK.new_edge(kk4, kk5);
+	//KK.new_edge(kk5, kk4);
+	KK.new_edge(kk1, kk5);
 	KK.new_edge(kk6, kk5);
-	KK.new_edge(kk6, kk5);
+	//KK.new_edge(kk6, kk5);
 	KK.new_edge(kk6, kk5);
 	KK.new_edge(kk4, kk7);
 	KK.new_edge(kk7, kk4);
@@ -149,7 +151,8 @@ int main() {
 	//ZZ[kk3] = 267;
 	ZZ[kk3] = 500;
 	ZZ[kk4] = 5345;
-	ZZ[kk5] = 1172;
+	//ZZ[kk5] = 1172;
+	ZZ[kk5] = 1170;
 	ZZ[kk6] = 221;
 	ZZ[kk7] = 5378;
 
@@ -171,7 +174,7 @@ int main() {
 
 	 */
 	align_greedy(K, V, Z, KK, VV, ZZ);
-	draw_arr(K, V, Z, KK, VV, ZZ);
+	//draw_arr(K, V, Z, KK, VV, ZZ);
 
 	//align_greedy(K, V, Z, G, A, A);
 	//draw_arr(K, V, Z, G, A, A);

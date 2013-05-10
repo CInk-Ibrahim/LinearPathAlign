@@ -15,6 +15,9 @@ using leda::gw_edge_dir;
 using leda::bidirected_edge;
 using leda::gw_label_type;
 using leda::user_label;
+using leda::gw_position;
+using leda::central_pos;
+using leda::south_pos;
 
 
 
@@ -32,6 +35,7 @@ using leda::red;
 using leda::blue;
 using leda::blue2;
 using leda::orange;
+using leda::violet;
 
 #include <LEDA/geo/point.h>
 using leda::point;
@@ -100,6 +104,9 @@ using std::abs;
 using std::srand;
 using std::atoi;
 
+#include <string>
+using std::stringstream;
+using std::getline;
 
 
 

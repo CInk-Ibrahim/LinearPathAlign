@@ -6,6 +6,7 @@
  */
 
 #include "Alignment.h"
+#include "Visualization.h"
 #include "Include.h"
 #include "MinLA.h"
 
@@ -26,6 +27,8 @@ void align_greedy(graph& G, node_array<int>& A, node_array<int>& B, graph& K,
 			}
 		}
 	}
+	array<int> La = Li;
+
 
 	int i = 1;
 	forall_nodes(u,K) {
@@ -44,6 +47,7 @@ void align_greedy(graph& G, node_array<int>& A, node_array<int>& B, graph& K,
 	}
 
 	simulated_annealing_protected(K, V, L);
+	draw_arr(G, A, B, K, V, Z, La);
 }
 
 
